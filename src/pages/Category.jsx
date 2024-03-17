@@ -62,7 +62,7 @@ function Category() {
   }, [sortBy, productCopy]);
 
   return (
-    <div className="w-full flex p-5 gap-4">
+    <div className="w-full flex flex-wrap md:flex-nowrap p-5 gap-4">
       <div className="w-[300px]  bg-gray-100 shadow-lg rounded-sm">
         <h2
           onClick={toggleCategory}
