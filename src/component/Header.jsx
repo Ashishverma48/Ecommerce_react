@@ -57,6 +57,7 @@ function Header() {
           </li>
           <li>
             <NavLink
+              to="/login"
               className={() => {
                 `flex border`;
               }}
@@ -75,7 +76,7 @@ function Header() {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
-          class="w-7 h-7 stroke-2"
+          className="w-7 h-7 stroke-2"
         >
           <path
             fill-rule="evenodd"
