@@ -11,6 +11,7 @@ import SignUp from "../pages/SignUp.jsx";
 import { Login } from "@mui/icons-material";
 import LoginPage from "../pages/LoginPage.jsx";
 import DashBoard from "../pages/DashBoard.jsx";
+import Cart from "../pages/Cart.jsx";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +19,7 @@ export const router = createBrowserRouter(
       <Route path="/" element={<Home />} />
       <Route path="/product/:id" element={<ProductDetail />} />
       <Route path="/category" element={<Category />} />
+      <Route path="/cart" element={<Cart />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/user" element={<DashBoard/>} />

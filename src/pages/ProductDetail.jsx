@@ -4,13 +4,18 @@ import { useParams } from "react-router-dom";
 import { discountPrice } from "../constant/index";
 import { Rating } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-
+import { useDispatch } from "react-redux";
+import { AddCard } from "@mui/icons-material";
+import { addCart } from "../redux/feature/cart/CartSlice";
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState();
   const [loading, setloading] = useState(false);
+
   const [error, setError] = useState(false);
+  const dispatch = useDispatch()
   useEffect(() => {
+
     setloading(true);
     axios
       .get(`https://dummyjson.com/products/${id}`)
@@ -88,7 +93,7 @@ function ProductDetail() {
               </h6>
               <p>{product?.description}</p>
             </div>
-            <button className="py-2 px-10 bg-primary text-white font-semibold mt-7 rounded-sm  shadow-2xl hover:bg-orange-900 duration-300">
+            <button onClick={()=>dispatch(addCart(product))}  className="py-2 px-10 bg-primary text-white font-semibold mt-7 rounded-sm  shadow-2xl hover:bg-orange-900 duration-300">
               <AddShoppingCartIcon /> Add To Cart
             </button>
           </div>

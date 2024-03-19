@@ -5,11 +5,14 @@ import { Badge } from "@mui/material";
 import { ShoppingCart, ShoppingCartOutlined } from "@mui/icons-material";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 function Header() {
   const [show, setShow] = useState(false);
+  const cartItem = useSelector((state) => state?.cart?.cart);
+
   return (
-    <header className="py-2 px-10  relative shadow-lg items-center flex justify-between">
+    <header className="py-2 md:px-10 px-4  relative shadow-lg items-center flex justify-between">
       <div>
         <Link to="/">
           <img src={logo} alt="" className="w-[170px]     object-contain" />
@@ -19,7 +22,7 @@ function Header() {
         <ul
           className={`flex flex-row   md:gap-12  text-lg font-semibold ${
             show
-              ? " flex-col absolute top-[70px] pt-10 bg-opacity-80 backdrop-blur-sm right-0 px-10 gap-5 z-10 bg-white w-full pb-10"
+              ? " flex-col h-screen duration-500 transition-all font-normal text-[30px] absolute top-[70px] pt-10 bg-opacity-80 backdrop-blur-sm right-0 px-10 gap-5 z-10 bg-white w-full pb-10"
               : "hidden md:flex"
           }`}
         >
@@ -48,9 +51,8 @@ function Header() {
             </NavLink>
           </li>
           <li>
-            <NavLink>
-              Cart
-              <Badge badgeContent={22} color="secondary">
+            <NavLink to="/cart">
+              <Badge badgeContent={cartItem.length} color="secondary">
                 <ShoppingCartOutlined />
               </Badge>
             </NavLink>
@@ -79,9 +81,9 @@ function Header() {
           className="w-7 h-7 stroke-2"
         >
           <path
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75H12a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z"
-            clip-rule="evenodd"
+            clipRule="evenodd"
           />
         </svg>
       </div>
