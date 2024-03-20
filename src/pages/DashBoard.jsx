@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebaseConfig";
 import Spin from "../component/Spin";
 import { handleSignOut } from "../api/FirebaseAuthApi";
+import { logout } from "../redux/feature/cart/AuthSlice";
 function DashBoard() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -32,7 +33,10 @@ function DashBoard() {
 
       <button
         className="bg-red-100 py-2 px-10 rounded-md cursor-pointer"
-        onClick={handleSignOut}
+        onClick={() => {
+          handleSignOut();
+          navigate(logout);
+        }}
       >
         Logout
       </button>

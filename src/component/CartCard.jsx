@@ -23,7 +23,11 @@ function CartCard({ cart }) {
       className="w-full mb-3 p-4 text-[14px] flex-wrap  gap-2 backdrop-blur-md bg-opacity-75 justify-between  hover:shadow-none duration-1500  flex rounded-sm shadow-md bg-slate-50 border   "
     >
       <div>
-        <img src={cart.thumbnail} className="w-[95px]  rounded-sm " alt="" />
+        <img
+          src={cart.thumbnail}
+          className="w-[95px] object-contain  rounded-sm "
+          alt=""
+        />
       </div>
       <div>
         <h2 className="font-semibold mb-1 text-blue-700 ">{cart.title}</h2>
