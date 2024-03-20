@@ -9,10 +9,18 @@ import {
 } from "../redux/feature/cart/CartSlice";
 function CartCard({ cart }) {
   const dispatch = useDispatch();
+
+  function totalPrice(cart) {
+    return (
+      cart.quantity *
+      discountPrice(cart.price, cart.discountPercentage).toFixed(0)
+    );
+  }
+
   return (
     <div
       key={cart.id}
-      className="w-full mb-3 p-4 text-[14px] backdrop-blur-md bg-opacity-75 justify-between  hover:shadow-none duration-1500  flex rounded-sm shadow-md bg-white   "
+      className="w-full mb-3 p-4 text-[14px] flex-wrap  gap-2 backdrop-blur-md bg-opacity-75 justify-between  hover:shadow-none duration-1500  flex rounded-sm shadow-md bg-slate-50 border   "
     >
       <div>
         <img src={cart.thumbnail} className="w-[95px]  rounded-sm " alt="" />
@@ -33,7 +41,7 @@ function CartCard({ cart }) {
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="red"
-            class="w-5 h-5"
+            className="w-5 h-5"
           >
             <path
               stroke-linecap="round"
@@ -47,7 +55,7 @@ function CartCard({ cart }) {
       <div className=" flex items-center gap-1">
         <button
           onClick={() => dispatch(decrementItem(cart))}
-          className="py-2 px-4 bg-red-500 hover:bg-red-600 duration-200 hover:shadow-none text-white rounded-sm shadow-xl mr-2 font-semibold text-md"
+          className="py-1 px-2 bg-red-500 hover:bg-red-600 duration-200 hover:shadow-none text-white rounded-sm shadow-xl mr-2 font-semibold text-md"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +63,7 @@ function CartCard({ cart }) {
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6 stroke-2"
+            className="w-6 h-6 stroke-2"
           >
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
           </svg>
@@ -65,7 +73,7 @@ function CartCard({ cart }) {
         </button>
         <button
           onClick={() => dispatch(incrementItem(cart))}
-          className="py-2 px-4 bg-green-500 hover:bg-green-600 hover:shadow-none text-white  rounded-sm shadow-xl duration-200 mr-2 font-semibold text-md"
+          className="py-1 px-2 bg-green-500 hover:bg-green-600 hover:shadow-none text-white  rounded-sm shadow-xl duration-200 mr-2 font-semibold text-md"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -91,10 +99,7 @@ function CartCard({ cart }) {
         <div className=" mt-2">
           <span> Total Price</span>{" "}
           <h2 className="text-green-700 mt-1 text-[17px]">
-            $
-            {(
-              cart.quantity * discountPrice(cart.price, cart.discountPercentage)
-            ).toFixed(1)}
+            ${totalPrice(cart)}
           </h2>
         </div>
       </div>

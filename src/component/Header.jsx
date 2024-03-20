@@ -22,7 +22,7 @@ function Header() {
         <ul
           className={`flex flex-row   md:gap-12  text-lg font-semibold ${
             show
-              ? " flex-col h-screen duration-500 transition-all font-normal text-[30px] absolute top-[70px] pt-10 bg-opacity-80 backdrop-blur-sm right-0 px-10 gap-5 z-10 bg-white w-full pb-10"
+              ? " flex-col h-screen duration-500 transition-all font-normal text-[30px] absolute top-[70px] pt-10  right-0 px-10 gap-5 z-10 bg-white w-2/3 pb-10"
               : "hidden md:flex"
           }`}
         >

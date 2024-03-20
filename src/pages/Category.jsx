@@ -36,7 +36,7 @@ function Category() {
         .catch((error) => console.log(error));
     }
     if (categoryType == "all") {
-      getCategoryProduct("https://dummyjson.com/products?limit=8&skip=1");
+      getCategoryProduct("https://dummyjson.com/products?limit=9");
     } else {
       getCategoryProduct(
         `https://dummyjson.com/products/category/${categoryType}`
