@@ -6,9 +6,15 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/feature/cart/CartSlice";
+import { toast } from "react-toastify";
 function Card({ card }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  function addToCart() {
+    dispatch(addCart(card));
+    toast.success("Item Addedd SuccessFully");
+  }
   return (
     <div
       key={`card - ${card.id}`}
@@ -43,7 +49,10 @@ function Card({ card }) {
       </div>
       <div className=" absolute top-0 right-0 mr-2 mt-4 z-10 transition-transform duration-300 transform scale-0 group-hover:scale-100">
         <div className="flex flex-col gap-3">
-          <div onClick={()=>dispatch(addCart(card))} className="p-2  shadow-2xl rounded-full bg-slate-600 text-white    ">
+          <div
+            onClick={() => addToCart()}
+            className="p-2  shadow-2xl rounded-full bg-slate-600 text-white    "
+          >
             <AddShoppingCartIcon />
           </div>
           <div className="p-2  shadow-2xl rounded-full bg-orange-600 text-white">

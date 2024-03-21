@@ -150,6 +150,20 @@ function Category() {
               Low To High
             </button>
           </div>
+          <div className="mt-5 px-5 py-4 font-semibold">
+            <h2>
+              <div className="flex justify-between ">
+                <p>Min</p>
+                <p>12</p>
+                <p>Max</p>
+              </div>
+
+              <input
+                type="range"
+                class="w-full h-4 rounded-full overflow-hidden appearance-none bg-gray-300 slider-thumb mt-1 focus:outline-none focus:bg-gray-300"
+              />
+            </h2>
+          </div>
         </div>
       </div>
       <div className="w-[calc(100vw-300px)]">

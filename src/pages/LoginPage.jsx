@@ -14,7 +14,7 @@ function LoginPage() {
   useEffect(() => {
     onAuthStateChanged(auth, (res) => {
       if (res?.accessToken) {
-        dispatch(login(res));
+        dispatch(login(res))
         navigate("/user");
         console.log(res);
       } else {

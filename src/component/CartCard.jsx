@@ -100,11 +100,13 @@ function CartCard({ cart }) {
         <h4 className="text-red-600 text-[10px]">
           {cart.discountPercentage} %
         </h4>
-        <div className=" mt-2">
+        <h2 className="text-blue-700">
+          {" "}
+          $ {discountPrice(cart.price, cart.discountPercentage).toFixed(0)}
+        </h2>
+        <div className=" mt-1">
           <span> Total Price</span>{" "}
-          <h2 className="text-green-700 mt-1 text-[17px]">
-            ${totalPrice(cart)}
-          </h2>
+          <h2 className="text-green-700  text-[17px]">${totalPrice(cart)}</h2>
         </div>
       </div>
     </div>
