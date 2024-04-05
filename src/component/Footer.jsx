@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 
 function Footer() {
-
-  return <div>Footer</div>;
+  return <footer className="p-4">Footer</footer>;
 }
 
 export default Footer;
