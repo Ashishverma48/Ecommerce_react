@@ -3,7 +3,8 @@ import { logo } from "../assets/index";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Badge } from "@mui/material";
 import { ShoppingCart, ShoppingCartOutlined } from "@mui/icons-material";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
@@ -17,23 +18,27 @@ function Header() {
   const userRef = useRef();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  function handleLinkClick() {
+    setShow(!show);
+  }
   return (
     <header className="py-2 md:px-10 px-4  relative shadow-lg items-center flex justify-between">
       <div>
-        <Link to="/">
+        <Link to="/" onClick={handleLinkClick}>
           <img src={logo} alt="" className="w-[170px]     object-contain" />
         </Link>
       </div>
-      <div className="  md:block">
+      <div className="  ">
         <ul
-          className={`flex flex-row md:gap-12  text-lg font-semibold ${
-            show
-              ? " flex-col h-screen duration-500 transition-all font-normal text-[30px] absolute top-[70px] pt-10  right-0 px-10 gap-5 z-10 bg-white w-2/3 pb-10"
-              : "hidden md:flex items-center"
-          }`}
+          style={{
+            maxHeight: `${show ? "100vh" : "0px"}`,
+            minHeight: `${show ? "100vh" : "0px"}`,
+          }}
+          className=" md:flex w-full gap-6 overflow-hidden md:overflow-visible duration-300 md:static bg-white z-50 capitalize  text-[19px] font-semibold absolute top-full left-0 "
         >
-          <li>
+          <li className="px-6 py-4 ">
             <NavLink
+              onClick={handleLinkClick}
               to="/"
               className={({ isActive }) =>
                 `${isActive ? "text-primary" : "text-inherit"}`
@@ -42,12 +47,13 @@ function Header() {
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink>About</NavLink>
+          <li className="px-6 pb-4">
+            <NavLink onClick={handleLinkClick}>About</NavLink>
           </li>
 
-          <li className="relative  cursor-pointer">
+          <li className="relative  cursor-pointer px-6 pb-4">
             <NavLink
+              onClick={handleLinkClick}
               to="/category"
               className={({ isActive }) =>
                 `${isActive ? "text-primary" : "text-inherit"}`
@@ -56,98 +62,22 @@ function Header() {
               Category
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/cart">
+          <li className="px-6 pb-4">
+            <NavLink to="/cart" onClick={handleLinkClick}>
               <Badge badgeContent={cartItem.length} color="secondary">
                 <ShoppingCartOutlined />
               </Badge>
+              <span className="ml-3">Cart</span>{" "}
             </NavLink>
           </li>
-          <li>
-            <p
-              className={() => {
-                `flex border `;
-              }}
-            >
-              <div className="relative">
-                <button
-                  className="top-10"
-                  onClick={() => setShowUser(!showUser)}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-7 h-7"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                    />
-                  </svg>
-                </button>
-                <div
-                  style={{
-                    maxHeight: `${
-                      showUser ? userRef.current.scrollHeight : "0"
-                    }px`,
-                  }}
-                  ref={userRef}
-                  className="bg-white mt-1 static overflow-hidden duration-200 ease-out   md:absolute top-[130%]  rounded-sm z-10 pl-6 pr-12 right-0"
-                >
-                  {authStatus ? (
-                    <div className="">
-                      <button
-                        onClick={() => navigate("/user")}
-                        className="mt-1 pt-2"
-                      >
-                        Profile
-                      </button>
-                      <button
-                        onClick={() => {
-                          handleSignOut();
-                          dispatch(logout());
-                        }}
-                        className="mt-1 py-3"
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  ) : (
-                    <div>
-                      <button
-                        onClick={() => navigate("/login")}
-                        className="mt-1 py-3"
-                      >
-                        Login
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </p>
+          <li className="px-6 pb-8" onClick={handleLinkClick}>
+            {authStatus ? <button>Profile</button> : <button>Login</button>}
           </li>
         </ul>
       </div>
-      <div
-        className={`block transform md:hidden  ${show ? "rotate-180" : ""}`}
-        onClick={() => setShow(!show)}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="w-7 h-7 stroke-2"
-        >
-          <path
-            fillRule="evenodd"
-            d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75H12a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z"
-            clipRule="evenodd"
-          />
-        </svg>
+
+      <div className="block md:hidden " onClick={() => setShow(!show)}>
+        {show ? <CloseIcon fontSize="large" /> : <MenuIcon fontSize="large" />}
       </div>
     </header>
   );
