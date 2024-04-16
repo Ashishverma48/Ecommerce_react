@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 import Card from "../component/Card";
 import ProductLoad from "../component/ProductLoad";
+import Paginate from "../component/Paginate";
 function Category() {
   const [category, setCategory] = useState([]);
   const [product, setProduct] = useState([]);
@@ -13,6 +14,10 @@ function Category() {
   const [sortBy, setSortBy] = useState("relevent");
   const categotyRef = useRef(null);
   const sortRef = useRef(null);
+
+  function handleCategoryClick() {
+    setIsCategoryOpen(!isCategoryOpen);
+  }
   useEffect(() => {
     axios
       .get("https://dummyjson.com/products/categories")
@@ -22,6 +27,12 @@ function Category() {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  const paginate = useCallback(
+    {},
+
+    []
+  );
 
   useEffect(() => {
     setLoading(true);
@@ -36,7 +47,7 @@ function Category() {
         .catch((error) => console.log(error));
     }
     if (categoryType == "all") {
-      getCategoryProduct("https://dummyjson.com/products?limit=9");
+      getCategoryProduct("https://dummyjson.com/products?limit=10");
     } else {
       getCategoryProduct(
         `https://dummyjson.com/products/category/${categoryType}`
@@ -96,7 +107,10 @@ function Category() {
           {category?.map((item) => (
             <p
               key={`categoty ${item}`}
-              onClick={(e) => setCategoryType(e.target.innerText.toLowerCase())}
+              onClick={(e) => {
+                setCategoryType(e.target.innerText.toLowerCase()),
+                  handleCategoryClick();
+              }}
               className="mt-1 pb-1 cursor-pointer hover:text-primary text-slate-600  text-[14px] font-semibold"
             >
               {item.toUpperCase()}
@@ -177,6 +191,7 @@ function Category() {
                 .map((_, index) => <ProductLoad />)
             : product?.map((item, index) => <Card card={item} />)}
         </div>
+        <Paginate data = {product}/>
       </div>
     </div>
   );
