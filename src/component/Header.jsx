@@ -19,7 +19,7 @@ function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   function handleLinkClick() {
-    setShow(!show);
+    setShow(false);
   }
   return (
     <header className="py-2 md:px-10 px-4  relative shadow-lg items-center flex justify-between">
@@ -34,9 +34,9 @@ function Header() {
             maxHeight: `${show ? "100vh" : "0px"}`,
             minHeight: `${show ? "100vh" : "0px"}`,
           }}
-          className=" md:flex w-full gap-6 overflow-hidden md:overflow-visible duration-300 md:static bg-white z-50 capitalize  text-[19px] font-semibold absolute top-full left-0 "
+          className=" md:flex  items-center w-full gap-9 overflow-hidden md:overflow-visible duration-300 md:static bg-white z-50 capitalize  text-[19px] font-semibold absolute top-full left-0 "
         >
-          <li className="px-6 py-4 ">
+          <li className="px-6 md:px-0 py-4 md:py-0">
             <NavLink
               onClick={handleLinkClick}
               to="/"
@@ -47,11 +47,11 @@ function Header() {
               Home
             </NavLink>
           </li>
-          <li className="px-6 pb-4">
+          <li className="px-6 pb-4 md:px-0 md:pb-0">
             <NavLink onClick={handleLinkClick}>About</NavLink>
           </li>
 
-          <li className="relative  cursor-pointer px-6 pb-4">
+          <li className="relative  cursor-pointer px-6 pb-4 md:px-0 md:pb-0">
             <NavLink
               onClick={handleLinkClick}
               to="/category"
@@ -62,7 +62,7 @@ function Header() {
               Category
             </NavLink>
           </li>
-          <li className="px-6 pb-4">
+          <li className="px-6 pb-4 md:px-0 md:pb-0">
             <NavLink to="/cart" onClick={handleLinkClick}>
               <Badge badgeContent={cartItem.length} color="secondary">
                 <ShoppingCartOutlined />
@@ -70,7 +70,7 @@ function Header() {
               <span className="ml-3">Cart</span>{" "}
             </NavLink>
           </li>
-          <li className="px-6 pb-8" onClick={handleLinkClick}>
+          <li className="px-6 pb-8 md:px-0 md:pb-0" onClick={handleLinkClick}>
             {authStatus ? <button>Profile</button> : <button>Login</button>}
           </li>
         </ul>
