@@ -24,15 +24,15 @@ function Category() {
       .then((data) => {
         data.data.unshift("All");
         setCategory(data?.data);
+
+        console.log(data?.data);
+        
       })
       .catch((error) => console.log(error));
   }, []);
+// console.log("HELLO",category);
 
-  const paginate = useCallback(
-    {},
-
-    []
-  );
+ 
 
   useEffect(() => {
     setLoading(true);
@@ -105,15 +105,17 @@ function Category() {
           }}
         >
           {category?.map((item) => (
+            
+            
             <p
-              key={`categoty ${item}`}
+              key={`category-${item.url}`}
               onClick={(e) => {
                 setCategoryType(e.target.innerText.toLowerCase()),
                   handleCategoryClick();
               }}
               className="mt-1 pb-1 cursor-pointer hover:text-primary text-slate-600  text-[14px] font-semibold"
             >
-              {item.toUpperCase()}
+              {item.name}
             </p>
           ))}
         </div>
@@ -182,14 +184,14 @@ function Category() {
       </div>
       <div className="w-[calc(100vw-300px)]">
         <h2 className="font-semibold text-2xl py-1 mb-2 ml-10">
-          {categoryType.toLocaleUpperCase()}
+          {/* {categoryType.toLocaleUpperCase()} */}
         </h2>
         <div className="w-full  grid md:grid-cols-3 gap-10  rounded-sm">
           {loading
             ? Array(6)
                 .fill("")
                 .map((_, index) => <ProductLoad />)
-            : product?.map((item, index) => <Card card={item} />)}
+            : product?.map((item, index) => <Card card={item}  key={`item-${index}`}/>)}
         </div>
         <Paginate data = {product}/>
       </div>

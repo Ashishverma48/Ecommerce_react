@@ -18,6 +18,7 @@ function Header() {
   const userRef = useRef();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   function handleLinkClick() {
     setShow(false);
   }
@@ -71,7 +72,16 @@ function Header() {
             </NavLink>
           </li>
           <li className="px-6 pb-8 md:px-0 md:pb-0" onClick={handleLinkClick}>
-            {authStatus ? <button>Profile</button> : <button>Login</button>}
+            {authStatus ? (
+            <button  onClick={() => navigate("/user")}
+            >Profile
+            </button>
+
+            ) : (
+              <Link to="/login" onClick={handleLinkClick}>
+              Login
+              </Link>
+            )}
           </li>
         </ul>
       </div>
